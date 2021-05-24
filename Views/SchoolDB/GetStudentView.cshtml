@@ -133,29 +133,24 @@
         alert("Data is being loaded by AJAX.");
         var data = data || {};
         var url = '/SchoolDB/getStudentAJAX2';
-        //$("#tblStudent tbody tr").remove();
-        $.getJSON(url, data).done(function (response) {
-            var mylabels = response.map(function (e) {
-                return e.datetime;
-            });
-           var mydata = response.map(function (e) {
-               //alert(e.val);
-                return e.val;
-            }
-            );
-            console.log(mydata); //(ctrl+shift+i)
-            data = mydata;
-            alert(data.StudentName);
-            $.each(rmydata.items, function (i, item) {
-                alert(item.StudentId);
+
+        $.getJSON(url, function(data){
+            $.each(data, function (i, item) {
+             
+                console.log(item);
+
+
+
+              //  alert(item.StudentId);
                 var rows = "<tr>"
-                    + "<td class='prtoducttd'>" + item.StudentId + "</td>"
-                    + "<td class='prtoducttd'>" + item.StudentName + "</td>"
-                    + "<td class='prtoducttd'>" + item.StandardId + "</td>"
+                    + "<td class='prtoducttd'>" + item.studentId + "</td>"
+                    + "<td class='prtoducttd'>" + item.studentName + "</td>"
+                    + "<td class='prtoducttd'>" + item.standardId + "</td>"
                     + "</tr>";
                 $('#tblStudent tbody').append(rows);
             });
         });
+
     };
 
 

@@ -40,13 +40,13 @@ namespace AdminLTE
             //services.AddMvc()
             //.AddJsonOptions(options => options.JsonSerializerOptions.ContractResolver = new DefaultContractResolver());
 
-            services.AddMvc(o =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                o.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
-            });
+            //services.AddMvc(o =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //        .RequireAuthenticatedUser()
+            //        .Build();
+            //    o.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

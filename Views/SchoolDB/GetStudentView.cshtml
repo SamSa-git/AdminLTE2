@@ -139,11 +139,11 @@
                 return e.datetime;
             });
            var mydata = response.map(function (e) {
-               alert(e.val);
+               //alert(e.val);
                 return e.val;
             }
             );
-            console.log(mydata);
+            console.log(mydata); //(ctrl+shift+i)
             data = mydata;
             alert(data.StudentName);
             $.each(rmydata.items, function (i, item) {

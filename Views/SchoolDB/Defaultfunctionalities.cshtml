@@ -1,0 +1,26 @@
+﻿
+@*@{
+    ViewData["Title"] = "defaultfunctionalities";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}*@
+
+<h1>defaultfunctionalities</h1>
+
+@using Syncfusion.EJ2
+
+
+
+    <div class="control-section">
+
+        <ejs-grid id="Grid" dataSource="ViewBag.dataSource" allowPaging="true">
+            <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column field="StudentID" headerText="Order ID" textAlign="Right" width="120"></e-grid-column>
+                <e-grid-column field="StudentName" headerText="Student Name" width="150"></e-grid-column>
+                <e-grid-column field="StandardId" headerText="StaandardId" format="yMd" width="130"></e-grid-column>
+               
+
+            </e-grid-columns>
+        </ejs-grid>
+
+    </div>

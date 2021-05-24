@@ -1,0 +1,246 @@
+﻿@*@model IEnumerable<AdminLTE.ViewModels.StudentViewModel>*@
+
+
+@{
+    ViewData["Title"] = "SyncFusionInlineGridGetStudent";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h1>SyncFusionInlineGridGetStudent</h1>
+
+@using Syncfusion.EJ2
+@Html.AntiForgeryToken()
+
+
+@*<p>Employee Id : @ViewBag.dataSource</p>*@
+
+@*@section ControlsSection{*@
+@*<div class="col-md-5  control-section">*@
+@*<div class="col-md-4 property-section">*@
+<ejs-button id="element" content="Button"></ejs-button>
+@*<ej:Button ID="refresh" runat="server" Type="Button" Text="Refresh" ClientSideOnClick="refresh"/>*@
+<div class="row">
+    <div class="col-sm-6 control-section">
+        @*actionBegin="actionBegin"*@
+        @*load="load"*@
+        @*dataSource="ViewBag.dataSource"*@
+        @*json="@ViewBag.dataSource"*@
+        @*adaptor="RemoteSaveAdaptor"*@
+
+        @*<ejs-grid id="Grid" load="load" toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel" })" allowPaging="true" actionBegin="actionBegin">
+        <e-data-manager json="@ViewBag.dataSource" adaptor="RemoteSaveAdaptor" insertUrl="/Home/Insert" updateUrl="/SchoolDB/Update" removeUrl="/Home/Delete"></e-data-manager>
+        <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" newRowPosition="Top" mode="Normal" />
+        <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>*@
+
+        @*rowSelected="rowPositionChange"*@
+
+        @*<ejs-grid id="Grid" load="load" toolbar="@(new List<string>() { "Add","Delete","Update", "Cancel" })" allowPaging="true">
+        <e-data-manager  json="@ViewBag.dataSource" adaptor="RemoteSaveAdaptor" insertUrl="/Home/Insert" updateUrl="/SchoolDB/Update" removeUrl="/SchoolDB/Remove"></e-data-manager>*@
+
+        @*actionComplete="actionComplete"*@
+
+        <ejs-grid id="Grid"dataSource="ViewBag.dataSource" load="load" toolbar="@(new List<string>() { "Add","Delete","Update", "Cancel" })" allowPaging="true"  >
+            <e-data-manager json="@ViewBag.dataSource" adaptor="RemoteSaveAdaptor" insertUrl="/Home/Insert" updateUrl="/SchoolDB/Update" removeUrl="/SchoolDB/Remove"></e-data-manager>
+            <e-grid-editSettings allowDeleting="true" allowEditing="true" allowAdding="true" newRowPosition="Top" mode="Normal"></e-grid-editSettings>
+            <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+
+            <e-grid-columns>
+                <e-grid-column field="StudentId" headerText="Student ID" isPrimaryKey="true" validationRules="@(new { required=true, number=true})" width="50"></e-grid-column>
+                <e-grid-column field="StudentName" headerText="Student Name" validationRules="@(new { required=true})" width="80"></e-grid-column>
+                <e-grid-column field="StandardId" headerText="StandardId" validationRules="@(new { required=true})" width="50"></e-grid-column>
+                @*textAlign="Right" editType="numericedit" format="C2"*@
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <div class="col-sm-4">
+        <table id="property" title="Properties" style="width: 100%">
+            <tr>
+                <td style="width: 100%">
+                    <div style="padding-top: 7px">Add New Row Position</div>
+                </td>
+                <td style="width: 50%;padding-right: 10px">
+                    <div id='typeddl'>
+                        <ejs-dropdownlist id="newRowPosition" dataSource="@ViewBag.ddDataSource" value="@("Top")" change="rowPositionChange" popupHeight="220px"></ejs-dropdownlist>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+@*<div class="col-md-3 property-section">
+        <table id="property" title="Properties" style="width: 100%">
+            <tr>
+                <td style="width: 100%">
+                    <div style="padding-top: 7px">Add New Row Position</div>
+                </td>
+                <td style="width: 50%;padding-right: 10px">
+                    <div id='typeddl'>
+                        <ejs-dropdownlist id="newRowPosition" dataSource="@ViewBag.ddDataSource" value="@("Top")" change="rowPositionChange" popupHeight="220px"></ejs-dropdownlist>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>*@
+@*<script>
+
+        function rowPositionChange(args) {
+            var grid = document.getElementById("Grid").ej2_instances[0];
+            grid.editSettings.newRowPosition = this.value;
+            //alert("ROW CHANGED");
+            //grid.refresh();
+        }
+
+        function actionBegin(args) {
+            var grid = document.getElementById("Grid").ej2_instances[0];
+            if (args.requestType === 'save') {
+                if (grid.pageSettings.currentPage !== 1 && grid.editSettings.newRowPosition === 'Top') {
+                    args.index = (grid.pageSettings.currentPage * grid.pageSettings.pageSize) - grid.pageSettings.pageSize;
+                } else if (grid.editSettings.newRowPosition === 'Bottom') {
+                    args.index = (grid.pageSettings.currentPage * grid.pageSettings.pageSize) - 1;
+                }
+            }
+        }
+
+    </script>*@
+
+<script type="text/javascript">
+    //function actionComplete(args) {
+    //    if (args.requestType == 'Update') {
+    //        alert("Will be refreshed");
+    //        var ajax2 = new ej.base.Ajax({
+    //            url: "/SchoolDB/Update", //render the partial view 
+    //            type: "POST",
+    //            contentType: "application/json",
+    //            data: JSON.stringify({ value: args.rowData })
+    //            //data: args.rowData                
+
+                                   
+    //            });
+    //    }
+    //}
+    //load();
+    //this.dataSource.adaptor = customAdaptor;
+    window.customAdaptor = new ej.data.RemoteSaveAdaptor();
+    //var grid = document.getElementById("Grid").ej2_instances[0];
+    //grid.load = "load";
+    //load();
+    //alert("Will be refreshed");
+    ////grid.refresh(); // refresh the Grid.
+    //alert("Will be refreshed1");
+    //
+    customAdaptor = ej.base.extend(customAdaptor, {
+        //insert(dm, data, tableName) {
+        //    this.updateType = 'add';
+        //    return {
+        //        url: dm.dataSource.insertUrl || dm.dataSource.crudUrl || dm.dataSource.url,
+        //        data: $.param({
+        //            //Added the anti-forgery token.
+        //            __RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+        //            value: data,
+        //            table: tableName,
+        //            action: 'insert'
+        //        }),
+        //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+        //    };
+        //},
+        update(dm, keyField, value, tableName) {
+            //debugger;
+            this.updateType = 'update';
+            this.updateKey = keyField;
+            return {
+                type: 'POST',
+                url: dm.dataSource.updateUrl || dm.dataSource.crudUrl || dm.dataSource.url,
+                data: $.param({
+                    //Added the anti-forgery token.
+                    __RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+                    value: value,
+                    action: 'update',
+                    keyColumn: keyField,
+                    key: value[keyField],
+                    table: tableName
+                }),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+
+            };
+
+        //    //var grid = document.getElementById("Grid").ej2_instances[0];
+        //    ////var data = { OrderID: 10247, CustomerID: "ASDFG", Freight: 40.4, OrderDate: new Date(8367642e5) };
+        //    ////grid.dataSource.unshift(data); // add new record.
+        //    //alert("Will be refreshed");
+        //    //grid.refresh(); // refresh the Grid.
+        },
+        remove(dm, keyField, value, tableName) {
+            ej.data.JsonAdaptor.prototype.remove(dm, keyField, value);
+            return {
+                type: 'POST',
+                url: dm.dataSource.removeUrl || dm.dataSource.crudUrl || dm.dataSource.url,
+                data: $.param({
+                    //Added the anti-forgery token.
+                    __RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+                    key: value,
+                    keyColumn: keyField,
+                    table: tableName,
+                    action: 'remove'
+
+                }),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+            };
+        }
+
+
+    });
+    ////document.getElementById('Update').onclick = function () {
+    ////    var grid = document.getElementById("Grid").ej2_instances[0];
+    ////    //var data = { OrderID: 10247, CustomerID: "ASDFG", Freight: 40.4, OrderDate: new Date(8367642e5) };
+    ////    //grid.dataSource.unshift(data); // add new record.
+    ////    alert("Will be refreshed");
+    ////    grid.refresh(); // refresh the Grid.
+    ////};
+
+    //alert("Will be refreshed2");
+
+    function load() {
+
+
+        this.dataSource.adaptor = customAdaptor;
+        //window.location.reload();
+
+
+
+    }
+</script>
+
+<script type="text/javascript">
+
+    function ShowErrorPopup() {
+        alert('Sorry, we could not process your order.');
+    }
+</script>
+@if (ViewBag.JavaScriptFunction != null)
+{
+    <script type="text/javascript">
+            @Html.Raw(ViewBag.JavaScriptFunction)
+    </script>
+}
+
+<style>
+    #typeddl {
+        min-width: 100px;
+    }
+</style>
+@*}*@
+
+@*<div class="control-section">
+
+        <ejs-grid id="Grid" dataSource="ViewBag.dataSource" allowPaging="true">
+            <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column field="StudentId" headerText="StudentId" textAlign="Right" width="120"></e-grid-column>
+                <e-grid-column field="StudentName" headerText="Customer Name" width="150"></e-grid-column>
+                <e-grid-column field="StandardId" headerText=" Order Date" format="yMd" width="130"></e-grid-column>
+
+
+            </e-grid-columns>
+        </ejs-grid>
+
+    </div>*@

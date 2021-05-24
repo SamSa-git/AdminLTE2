@@ -1,0 +1,204 @@
+﻿<html>
+@{
+    ViewData["Title"] = "ChartJs1";
+    ViewBag.Title = "Chart.js example";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+
+}
+<head>
+    <script src="~/jquery/jquery.min.js"></script>
+</head>
+<body>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Please enter the details below.</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-5">
+                    <label>Student Name</label>
+                    <input type="text" name="StudentName" id="StudentName" class="form-control" placeholder="Enter Student Name" required="" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Standard ID</label>
+                    <input type="text" name="StandardId" id="StandardId" class="form-control" placeholder="Enter Student Address" required="" />
+                </div>
+
+                <div class="form-group col-md-1">
+                    <div style="float: right; display:inline-block;">
+                        <input class="btn btn-primary" name="submitButton" id="btnSave" value="Save" type="button">
+                    </div>
+                </div>
+            </div>
+        </div><hr />
+        <table id="tblStudent" class="table table-bordered table-striped table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th align="left" class="productth">ID</th>
+                    <th align="left" class="productth">Student Name</th>
+                    <th align="left" class="productth">Standard Id</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+@*url: '@Url.Action("createStudent")'*@
+
+@*@section Scripts
+    {*@
+<script type="text/javascript">
+
+    //$(function () {
+    //    LoadData();
+    //    $("#btnSave").click(function () {
+    //        //alert("");
+    //        var std = {};
+    //        std.studentName = $("#StudentName").val();
+    //        std.StandardId = $("#StandardId").val();
+    //        $.ajax({
+    //            type: "POST",
+    //            url: '/SchoolDB/AddStudent',
+    //            data: '{std: ' + JSON.stringify(std) + '}',
+    //            dataType: "json",
+    //            contentType: "application/json; charset=utf-8",
+    //            success: function () {
+    //               // alert("Data has been added successfully.");
+    //                LoadData();
+    //            },
+    //            error: function () {
+    //                alert("Error while inserting data");
+    //            }
+    //        });
+    //        return false;
+    //    });
+    //});
+
+    @*'@Url.Action("SchoolDB", "getStudentAJAX")'*@
+        //function LoadData() {
+        //    alert("Data is being loaded by AJAX.");
+        //$("#tblStudent tbody tr").remove();
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/SchoolDB/getStudentAJAX',
+        //    contentType: "application/json",
+        //    dataType: 'json',
+        //    //data: { id: '' },
+        //    success: function (data) {
+        //        var items = '';
+        //        $.each(data, function (i, item) {
+        //            var rows = "<tr>"
+        //                + "<td class='prtoducttd'>" + item.StudentId + "</td>"
+        //            + "<td class='prtoducttd'>" + item.StudentName + "</td>"
+        //            + "<td class='prtoducttd'>" + item.StandardId + "</td>"
+        //            + "</tr>";
+        //            $('#tblStudent tbody').append(rows);
+        //        });
+        //    },
+        //    error: function (ex) {
+        //        var r = jQuery.parseJSON(response.responseText);
+        //        alert("Message: " + r.Message);
+        //        alert("StackTrace: " + r.StackTrace);
+        //        alert("ExceptionType: " + r.ExceptionType);
+        //    }
+        //});
+        //return false;
+        //}
+
+    LoadData();
+
+    //function LoadData() {
+    //    alert("Data is being loaded by AJAX.");
+    //    var data = data || {};
+    //    var url = '/SchoolDB/getStudentAJAX';
+    //    //$("#tblStudent tbody tr").remove();
+    //    $.getJSON(url).done(function (response) {
+    //        alert("Data is being loaded by AJAX2.");
+    //        alert(response.item.StudentName);
+    //          $.each(response.items, function (i, item) {
+    //              alert(item.StudentId);
+    //              var rows = "<tr>"
+    //                  + "<td class='prtoducttd'>" + item.StudentId + "</td>"
+    //                  + "<td class='prtoducttd'>" + item.StudentName + "</td>"
+    //                  + "<td class='prtoducttd'>" + item.StandardId + "</td>"
+    //                  + "</tr>";
+    //              $('#tblStudent tbody').append(rows);
+    //          });
+    //      });
+    //};
+
+    function LoadData() {
+        alert("Data is being loaded by AJAX.");
+        var data = data || {};
+        var url = '/SchoolDB/getStudentAJAX2';
+        //$("#tblStudent tbody tr").remove();
+        $.getJSON(url, data).done(function (response) {
+            var mylabels = response.map(function (e) {
+                return e.datetime;
+            });
+           var mydata = response.map(function (e) {
+               alert(e.val);
+                return e.val;
+            }
+            );
+            console.log(mydata);
+            data = mydata;
+            alert(data.StudentName);
+            $.each(rmydata.items, function (i, item) {
+                alert(item.StudentId);
+                var rows = "<tr>"
+                    + "<td class='prtoducttd'>" + item.StudentId + "</td>"
+                    + "<td class='prtoducttd'>" + item.StudentName + "</td>"
+                    + "<td class='prtoducttd'>" + item.StandardId + "</td>"
+                    + "</tr>";
+                $('#tblStudent tbody').append(rows);
+            });
+        });
+    };
+
+
+
+</script>
+
+@*<script>
+       function () {
+           var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+           $.getJSON(flickerAPI, {
+               tags: "mount rainier",
+               tagmode: "any",
+               format: "json"
+           })
+               .done(function (data) {
+                   $.each(data.items, function (i, item) {
+                       $("<img>").attr("src", item.media.m).appendTo("#images");
+                       if (i === 3) {
+                           return false;
+                       }
+                   });
+               });
+       };
+
+    ajax_chart(myChart, json_url);
+
+                   // function to update our chart
+                   function ajax_chart(chart, url, data) {
+                       var data = data || {};
+
+                       $.getJSON(url, data).done(function(response) {
+                           var mylabels = response.map(function(e) {
+                               return e.datetime;
+                           });
+                           var mydata = response.map(function(e) {
+                                   return e.val;
+                               }
+                           );
+
+                           chart.data.labels = mylabels;
+                           chart.data.datasets[0].data = mydata; // or you can iterate for multiple datasets
+                           chart.update(); // finally update our chart
+                       });
+                   }
+       </script>*@
+@*}*@

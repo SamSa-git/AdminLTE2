@@ -129,25 +129,62 @@
     //      });
     //};
 
+    //function LoadData() {
+    //    //alert("Data is being loaded by AJAX.");
+    //    var data = data || {};
+    //    var url = '/SchoolDB/getStudentAJAX2';
+    //    //$("#tblStudent tbody tr").remove();
+    //    $.getJSON(url, data).done(function (response) {
+    //        var mylabels = response.map(function (e) {
+    //            return e.datetime;
+    //        });
+    //       var mydata = response.map(function (e) {
+    //           //alert(e.val);
+    //            return e.val;
+    //        }
+    //        );
+    //        console.log(mydata); //(ctrl+shift+i)
+    //        data = mydata;
+    //        alert(data.StudentName);
+    //        $.each(rmydata.items, function (i, item) {
+    //            alert(item.StudentId);
+    //            var rows = "<tr>"
+    //                + "<td class='prtoducttd'>" + item.studentId + "</td>"
+    //                + "<td class='prtoducttd'>" + item.studentName + "</td>"
+    //                + "<td class='prtoducttd'>" + item.standardId + "</td>"
+    //                + "</tr>";
+    //            $('#tblStudent tbody').append(rows);
+    //        });
+    //    });
+    //};
+
+
     function LoadData() {
         //alert("Data is being loaded by AJAX.");
         var data = data || {};
         var url = '/SchoolDB/getStudentAJAX2';
-        //$("#tblStudent tbody tr").remove();
-        $.getJSON(url, data).done(function (response) {
-            var mylabels = response.map(function (e) {
-                return e.datetime;
-            });
-           var mydata = response.map(function (e) {
-               //alert(e.val);
-                return e.val;
-            }
-            );
-            console.log(mydata); //(ctrl+shift+i)
-            data = mydata;
-            alert(data.StudentName);
-            $.each(rmydata.items, function (i, item) {
-                alert(item.StudentId);
+        $("#tblStudent tbody tr").remove();
+
+        //TODO: Idea: retreive from one arry two arrays, one Datetime,the other values
+
+        //var mylabels = response.map(function (e) {
+        //    return e.datetime;
+        //});
+
+        //$.getJSON(url, data).done(function (response) {
+        //    var mydata = response.map(function (e) {
+        //        return e.val;
+        //    }
+        // });
+
+
+        //data = mydata;
+
+        //---------------- Working AJAX -----------------------------------
+        $.getJSON(url, function (data) {
+            $.each(data, function (i, item) {
+                console.log(item); //(ctrl+shift+i)           
+                //alert(data.StudentName);
                 var rows = "<tr>"
                     + "<td class='prtoducttd'>" + item.studentId + "</td>"
                     + "<td class='prtoducttd'>" + item.studentName + "</td>"
@@ -156,6 +193,9 @@
                 $('#tblStudent tbody').append(rows);
             });
         });
+        //---------------------------------------------------
+
+
     };
 
 
